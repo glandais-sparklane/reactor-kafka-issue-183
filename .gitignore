@@ -1,0 +1,48 @@
+**/.settings/
+**/target/
+.attach_pid*
+
+# Eclipse
+.project
+.classpath
+.settings/
+target/
+bin/
+
+# IntelliJ
+.idea
+.idea/
+.idea/workspace.xml
+*.ipr
+*.iml
+*.iws
+
+
+# NetBeans
+nb-configuration.xml
+
+# Visual Studio Code
+.vscode
+.history
+
+# OSX
+.DS_Store
+
+# Vim
+*.swp
+*.swo
+
+# patch
+*.orig
+*.rej
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+
+# Maven wrapper
+maven-wrapper.jar
+mvnw.cmd
