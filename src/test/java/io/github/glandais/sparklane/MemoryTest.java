@@ -92,7 +92,7 @@ public class MemoryTest {
     public void test() {
 
         // send messages, indefinitely
-        sendMessages();
+        sendMessages(100_000);
 
         // read messages
         Flux<ReceiverRecord<String, String>> kafkaFlux = getMessages();
@@ -107,9 +107,12 @@ public class MemoryTest {
         await().atMost(1, TimeUnit.HOURS).until(() -> sentOutputCounter.get() > 1_000_000_000);
     }
 
-    private void sendMessages() {
+    private void sendMessages(int count) {
 
-        sender.send(Flux.range(0, Integer.MAX_VALUE).map(i -> getSenderRecord(INPUT_TOPIC, i))).subscribe(sr -> sentInputCounter.incrementAndGet());
+        sender.send(Flux.range(0, count)
+                .map(i -> getSenderRecord(INPUT_TOPIC, i)))
+                .doOnNext(sr -> sentInputCounter.incrementAndGet())
+                .count().block();
     }
 
     private Flux<ReceiverRecord<String, String>> getMessages() {
