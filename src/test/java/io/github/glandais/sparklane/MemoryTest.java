@@ -103,8 +103,8 @@ public class MemoryTest {
         // send mapped messages
         sender.send(toSend).subscribe(sr -> sentOutputCounter.incrementAndGet());
 
-        // await until OOM
-        await().atMost(1, TimeUnit.HOURS).until(() -> sentOutputCounter.get() > 1_000_000_000);
+        // await until OOM, or not
+        await().atMost(1, TimeUnit.HOURS).until(() -> sentOutputCounter.get() == 90_000);
     }
 
     private void sendMessages(int count) {
